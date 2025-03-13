@@ -33,14 +33,14 @@ hours_cold_function <- function(site, season) {
                   kefj_exposure == "air")
   n_total_function <- sum(kefj_site == site &
                    kefj_season == season)
-  hours_cold_function <- n_cold * 30 / 60
-  days_total <- n_total * 30 / 60 / 24
-  hours_cold_per_day <- hours_cold / days_total
-  hours_cold_per_day
-  return(hours_cold_per_day)
+  hours_cold_function <- n_cold_function * 30 / 60
+  days_total <- n_total_function * 30 / 60 / 24
+  hours_cold_per_day <- hours_cold_function / days_total
+ return(hours_cold_per_day)
 }
 
-hours_cold_function("Nuka Pass", "Summer")
+hours_cold_function("Nuka_Pass", "Late winter")
+
 
 # Make an extreme choice --------------------------------------------------
 
@@ -77,7 +77,7 @@ hours_cold_per_day
 
 
 
-hours_cold_function <- function(site, season, extreme_type) {
+hours_extreme <- function(site, season, extreme_type) {
   if (extreme_type == "cold") {
     is_extreme <- kefj_temperature <= -4
   }else {
@@ -89,14 +89,13 @@ hours_cold_function <- function(site, season, extreme_type) {
                            kefj_exposure == "air")
   n_total_function <- sum(kefj_site == site &
                             kefj_season == season)
-  hours_extreme_function <- n_cold * 30 / 60
-  days_total <- n_total * 30 / 60 / 24
-  hours_extreme_per_day <- hours_extreme / days_total
-  hours_extreme_per_day
+  hours_extreme_function <- n_extreme_function * 30 / 60
+  days_total <- n_total_function * 30 / 60 / 24
+  hours_extreme_per_day <- hours_extreme_function / days_total
   return(hours_extreme_per_day)
 }
 
-houts_extreme_per_day("Nuka Pass", "Late winter", "heat")
+hours_extreme("Nuka_Pass", "Late winter", "cold")
 # Season to taste ---------------------------------------------------------
 
 # P7 What seasons are in the kefj dataset? What function would you use to
@@ -110,8 +109,8 @@ houts_extreme_per_day("Nuka Pass", "Late winter", "heat")
 
 seasons <- c( "Late winter", "Spring", "Summer", "Fall", "Early winter")
   for (i in 1:length(seasons)) {
-    heat_exposure <- hours_extreme_per_day(site, seasons[i], "heat")
-    cold_exposure <- hours_extreme_per_day(site, seasons[i], "cold")
+    heat_exposure <- hours_extreme(site, seasons[i], "heat")
+    cold_exposure <- hours_extreme(site, seasons[i], "cold")
     print(paste("Aialik", seasons[i], heat_exposure, cold_exposure))
 }
 
@@ -120,9 +119,9 @@ seasons <- c( "Late winter", "Spring", "Summer", "Fall", "Early winter")
 
 seasons <- c( "Late winter", "Spring", "Summer", "Fall", "Early winter")
 for (i in 1:length(seasons)) {
-  for (j in 1:length(site)) {
-  heat_exposure <- hours_extreme_per_day(site, seasons[i], "heat")
-  cold_exposure <- hours_extreme_per_day(site, seasons[i], "cold")
+  for (j in 1:length(site))
+  heat_exposure <- hours_extreme(site, seasons[i], "heat")
+  cold_exposure <- hours_extreme(site, seasons[i], "cold")
   print(paste("Aialik", seasons[i], heat_exposure, cold_exposure))
 }
 
